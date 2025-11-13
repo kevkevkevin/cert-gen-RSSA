@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Certificate Generator</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: #f5f5f5;
+    padding: 30px;
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 10px;
+  }
+
+  /* Tabs */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    gap: 10px;
+  }
+
+  .tab {
+    padding: 10px 20px;
+    border-radius: 6px;
+    background: #e0e0e0;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .tab.active {
+    background: #007bff;
+    color: white;
+  }
+
+  .template-list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 20px 0;
+  }
+
+  .template {
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .template.selected {
+    border: 2px solid #007bff;
+    box-shadow: 0 0 8px #007bff;
+  }
+
+  .template img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  #nameInput {
+    padding: 8px 12px;
+    width: 250px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+  }
+
+  button {
+    background: #007bff;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 5px;
+  }
+
+  button:hover {
+    background: #0056b3;
+  }
+
+  canvas {
+    display: none;
+  }
+
+  .output {
+    margin-top: 30px;
+  }
+
+  .output img {
+    width: 300px;
+    margin: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+  }
+
+  .day {
+    display: none;
+  }
+
+  .day.active {
+    display: flex;
+  }
+</style>
+</head>
+<body>
+
+<h1>🎓 Certificate Generator</h1>
+<p>Select templates and enter your name below:</p>
+
+<!-- Day Tabs 
+<div class="tabs">
+  <div class="tab active" data-day="day1">Day 1</div>
+  <div class="tab" data-day="day2">Day 2</div>
+  <div class="tab" data-day="day3">Day 3</div>
+</div>-->
+
+<div id="day1" class="template-list day active">
+    <div class="template" data-template="attendance.png">
+        <img src="certs/attendance.png">
+        <p style="font-size: 9px !important">Attendance</p>
+    </div>
+    <div class="template" data-template="cert1.png">
+        <img src="certs/cert1.png">
+        <p style="font-size: 9px !important">CO2 Contrast Adminstration WorkShop</p>
+    </div>
+
+    <div class="template" data-template="cert2.png">
+    <img src="certs/cert2.png">
+    <p style="font-size: 9px !important">Mastering Carotid Doppler Ultrasound</p>
+    </div>
+
+    <div class="template" data-template="cert3.png">
+    <img src="certs/cert3.png">
+    <p style="font-size: 9px !important">Next Era in Magnetic Resonance Imaging</p>
+    </div>
+
+    <div class="template" data-template="cert4.png">
+    <img src="certs/cert4.png">
+    <p style="font-size: 9px !important">Next-Gen Imaging: CT Photon Counting</p>
+    </div>
+
+    <div class="template" data-template="cert5.png">
+    <img src="certs/cert5.png">
+    <p style="font-size: 9px !important">Pediatric Abdominal Emergencies</p>
+    </div>
+
+    <div class="template" data-template="cert6.png">
+    <img src="certs/cert6.png">
+    <p style="font-size: 9px !important">Pre-Intra-Post Angio procedure</p>
+    </div>
+
+    <div class="template" data-template="cert7.png">
+    <img src="certs/cert7.png">
+    <p style="font-size: 9px !important">Say It Right:</p>
+    </div>
+
+    <div class="template" data-template="cert8.png">
+    <img src="certs/cert8.png">
+    <p style="font-size: 9px !important">Ultrasound Made Easy:</p>
+    </div>
+
+    <div class="template" data-template="cert9.png">
+    <img src="certs/cert9.png">
+    <p style="font-size: 9px !important">Ultrasound-Guided skills in Interventional</p>
+    </div>
+
+    <div class="template" data-template="cert10.png">
+        <img src="certs/cert10.png">
+        <p style="font-size: 9px !important">Advanced-CT-Post-processing</p>
+    </div>
+    <div class="template" data-template="cert11.png">
+        <img src="certs/cert11.png">
+        <p style="font-size: 9px !important">AI VS Radiologists</p>
+    </div>
+
+    <div class="template" data-template="cert12.png">
+        <img src="certs/cert12.png">
+        <p style="font-size: 9px !important">Angio/Fluoro Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert13.png">
+        <img src="certs/cert13.png">
+        <p style="font-size: 9px !important">Beyond the Basics:</p>
+    </div>
+
+    <div class="template" data-template="cert14.png">
+        <img src="certs/cert14.png">
+        <p style="font-size: 9px !important">CT Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert15.png">
+        <img src="certs/cert15.png">
+        <p style="font-size: 9px !important">Ethics in AI Panel discussion</p>
+    </div>
+
+    <div class="template" data-template="cert16.png">
+        <img src="certs/cert16.png">
+        <p style="font-size: 9px !important">From Shear Waves</p>
+    </div>
+
+    <div class="template" data-template="cert17.png">
+        <img src="certs/cert17.png">
+        <p style="font-size: 9px !important">Hands-on Advanced MRI Brain Imaging</p>
+    </div>
+
+    <div class="template" data-template="cert18.png">
+        <img src="certs/cert18.png">
+        <p style="font-size: 9px !important">Hands-on Cardiac MRI</p>
+    </div>
+
+    <div class="template" data-template="cert19.png">
+        <img src="certs/cert19.png">
+        <p style="font-size: 9px !important">Hands-on Difficult IV</p>
+    </div>
+
+    <div class="template" data-template="cert20.png">
+        <img src="certs/cert20.png">
+        <p style="font-size: 9px !important">How to Validate AI model</p>
+    </div>
+
+    <div class="template" data-template="cert21.png">
+        <img src="certs/cert21.png">
+        <p style="font-size: 9px !important">Mammo Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert22.png">
+        <img src="certs/cert22.png">
+        <p style="font-size: 9px !important">Mammography Essentials</p>
+    </div>
+
+    <div class="template" data-template="cert23.png">
+        <img src="certs/cert23.png">
+        <p style="font-size: 9px !important">Master’s Students Scientific Session</p>
+    </div>
+
+    <div class="template" data-template="cert24.png">
+        <img src="certs/cert24.png">
+        <p style="font-size: 9px !important">MRI Guided Breast Biopsy</p>
+    </div>
+
+    <div class="template" data-template="cert25.png">
+        <img src="certs/cert25.png">
+        <p style="font-size: 9px !important">MRI Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert26.png">
+        <img src="certs/cert26.png">
+        <p style="font-size: 9px !important">Nuclear Medicine Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert27.png">
+        <img src="certs/cert27.png">
+        <p style="font-size: 9px !important">Ultrasound Guided Lumber Puncture</p>
+    </div>
+
+    <div class="template" data-template="cert28.png">
+        <img src="certs/cert28.png">
+        <p style="font-size: 9px !important">US Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert29.png">
+        <img src="certs/cert29.png">
+        <p style="font-size: 9px !important">Xray Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert29.png">
+        <img src="certs/cert29.png">
+        <p style="font-size: 9px !important">Artificial Intelligence in US General Imaging</p>
+    </div>
+
+    <div class="template" data-template="cert30.png">
+        <img src="certs/cert30.png">
+    <p style="font-size: 9px !important">Comprehensive Liver</p>
+    </div>
+
+    <div class="template" data-template="cert31.png">
+        <img src="certs/cert31.png">
+        <p style="font-size: 9px !important">Contrast Enhanced Mammography reading workshop</p>
+    </div>
+
+    <div class="template" data-template="cert32.png">
+        <img src="certs/cert32.png">
+        <p style="font-size: 9px !important">Introduction to Biostatistics</p>
+    </div>
+
+    <div class="template" data-template="cert33.png">
+        <img src="certs/cert33.png">
+        <p style="font-size: 9px !important">Radiation Safety and Licensing Requirements</p>
+    </div>
+</div>
+
+<!-- <div id="day2" class="template-list day">
+    <div class="template" data-template="cert10.png">
+        <img src="certs/cert10.png">
+        <p style="font-size: 9px !important">Advanced-CT-Post-processing</p>
+    </div>
+    <div class="template" data-template="cert11.png">
+        <img src="certs/cert11.png">
+        <p style="font-size: 9px !important">AI VS Radiologists</p>
+    </div>
+
+    <div class="template" data-template="cert12.png">
+        <img src="certs/cert12.png">
+        <p style="font-size: 9px !important">Angio/Fluoro Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert13.png">
+        <img src="certs/cert13.png">
+        <p style="font-size: 9px !important">Beyond the Basics:</p>
+    </div>
+
+    <div class="template" data-template="cert14.png">
+        <img src="certs/cert14.png">
+        <p style="font-size: 9px !important">CT Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert15.png">
+        <img src="certs/cert15.png">
+        <p style="font-size: 9px !important">Ethics in AI Panel discussion</p>
+    </div>
+
+    <div class="template" data-template="cert16.png">
+        <img src="certs/cert16.png">
+        <p style="font-size: 9px !important">From Shear Waves</p>
+    </div>
+
+    <div class="template" data-template="cert17.png">
+        <img src="certs/cert17.png">
+        <p style="font-size: 9px !important">Hands-on Advanced MRI Brain Imaging</p>
+    </div>
+
+    <div class="template" data-template="cert18.png">
+        <img src="certs/cert18.png">
+        <p style="font-size: 9px !important">Hands-on Cardiac MRI</p>
+    </div>
+
+    <div class="template" data-template="cert19.png">
+        <img src="certs/cert19.png">
+        <p style="font-size: 9px !important">Hands-on Difficult IV</p>
+    </div>
+
+    <div class="template" data-template="cert20.png">
+        <img src="certs/cert20.png">
+        <p style="font-size: 9px !important">How to Validate AI model</p>
+    </div>
+
+    <div class="template" data-template="cert21.png">
+        <img src="certs/cert21.png">
+        <p style="font-size: 9px !important">Mammo Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert22.png">
+        <img src="certs/cert22.png">
+        <p style="font-size: 9px !important">Mammography Essentials</p>
+    </div>
+
+    <div class="template" data-template="cert23.png">
+        <img src="certs/cert23.png">
+        <p style="font-size: 9px !important">Master’s Students Scientific Session</p>
+    </div>
+
+    <div class="template" data-template="cert24.png">
+        <img src="certs/cert24.png">
+        <p style="font-size: 9px !important">MRI Guided Breast Biopsy</p>
+    </div>
+
+    <div class="template" data-template="cert25.png">
+        <img src="certs/cert25.png">
+        <p style="font-size: 9px !important">MRI Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert26.png">
+        <img src="certs/cert26.png">
+        <p style="font-size: 9px !important">Nuclear Medicine Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert27.png">
+        <img src="certs/cert27.png">
+        <p style="font-size: 9px !important">Ultrasound Guided Lumber Puncture</p>
+    </div>
+
+    <div class="template" data-template="cert28.png">
+        <img src="certs/cert28.png">
+        <p style="font-size: 9px !important">US Physics Quality Control</p>
+    </div>
+
+    <div class="template" data-template="cert29.png">
+        <img src="certs/cert29.png">
+        <p style="font-size: 9px !important">Xray Physics Quality Control</p>
+    </div>
+
+</div> -->
+
+<!-- <div id="day3" class="template-list day">
+    <div class="template" data-template="cert29.png">
+        <img src="certs/cert29.png">
+        <p style="font-size: 9px !important">Artificial Intelligence in US General Imaging</p>
+    </div>
+
+    <div class="template" data-template="cert30.png">
+        <img src="certs/cert30.png">
+    <p style="font-size: 9px !important">Comprehensive Liver</p>
+    </div>
+
+    <div class="template" data-template="cert31.png">
+        <img src="certs/cert31.png">
+        <p style="font-size: 9px !important">Contrast Enhanced Mammography reading workshop</p>
+    </div>
+
+    <div class="template" data-template="cert32.png">
+        <img src="certs/cert32.png">
+        <p style="font-size: 9px !important">Introduction to Biostatistics</p>
+    </div>
+
+    <div class="template" data-template="cert33.png">
+        <img src="certs/cert33.png">
+        <p style="font-size: 9px !important">Radiation Safety and Licensing Requirements</p>
+    </div>
+
+</div> -->
+
+<!-- Name input -->
+<input type="text" id="nameInput" placeholder="Enter your name"><br>
+
+<!-- Buttons -->
+<button id="generateBtn">Generate Certificates</button>
+<button id="downloadAllBtn" style="display:none;">Download All</button>
+
+<!-- Output area -->
+<div class="output" id="output"></div>
+
+<!-- Hidden canvas for drawing -->
+<canvas id="canvas"></canvas>
+
+<script>
+const tabs = document.querySelectorAll('.tab');
+const days = document.querySelectorAll('.day');
+const generateBtn = document.getElementById('generateBtn');
+const downloadAllBtn = document.getElementById('downloadAllBtn');
+const nameInput = document.getElementById('nameInput');
+const output = document.getElementById('output');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+let generatedImages = [];
+
+// TAB FUNCTIONALITY
+tabs.forEach(tab => {
+  tab.addEventListener('click', () => {
+    tabs.forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const dayId = tab.dataset.day;
+    days.forEach(day => {
+      day.classList.remove('active');
+      if (day.id === dayId) day.classList.add('active');
+    });
+  });
+});
+
+// Template selection toggle
+document.addEventListener('click', e => {
+  if (e.target.closest('.template')) {
+    e.target.closest('.template').classList.toggle('selected');
+  }
+});
+
+// Generate certificates
+generateBtn.addEventListener('click', async () => {
+  const name = nameInput.value.trim();
+  if (!name) return alert('Please enter your name');
+  
+  const selectedTemplates = [...document.querySelectorAll('.template.selected')];
+  if (selectedTemplates.length === 0) return alert('Select at least one certificate');
+
+  output.innerHTML = ''; 
+  generatedImages = [];
+
+  for (const t of selectedTemplates) {
+    const imgPath = 'certs/' + t.dataset.template;
+    const img = await loadImage(imgPath);
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+
+     // Fixed style for text
+    ctx.font = `300 75px Poppins`;
+    ctx.fillStyle = '#000';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.fillText(name, canvas.width / 2.25, canvas.height - 1030);
+
+    const dataURL = canvas.toDataURL('image/png');
+    generatedImages.push({ dataURL, fileName: `${name}_${t.dataset.template}` });
+
+    const imgEl = document.createElement('img');
+    imgEl.src = dataURL;
+    output.appendChild(imgEl);
+  }
+
+  // Show download all button
+  if (generatedImages.length > 0) {
+    downloadAllBtn.style.display = 'inline-block';
+  }
+});
+
+// Download all generated certificates
+downloadAllBtn.addEventListener('click', () => {
+  generatedImages.forEach(imgObj => {
+    const link = document.createElement('a');
+    link.href = imgObj.dataURL;
+    link.download = imgObj.fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  });
+});
+
+// Helper: Load image
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+</script>
+
+</body>
+</html>
