@@ -486,36 +486,27 @@ generateBtn.addEventListener('click', async () => {
   generatedImages = [];
 
   for (const t of selectedTemplates) {
-  const imgPath = 'certs/' + t.dataset.template;
-  const img = await loadImage(imgPath);
+    const imgPath = 'certs/' + t.dataset.template;
+    const img = await loadImage(imgPath);
 
-  canvas.width = img.width;
-  canvas.height = img.height;
-  ctx.drawImage(img, 0, 0);
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
 
-  const templateName = t.dataset.template;
-  ctx.textBaseline = 'middle';
-  ctx.textAlign = 'center';
-  ctx.fillStyle = '#000';
-
-  if (templateName === 'attendance.png') {
-    // 🟦 Custom placement for attendance certificate
-    ctx.font = `700 80px Poppins`; 
-    ctx.fillText(name, canvas.width / 2.25, canvas.height - 970);
-  } else {
-    // 🟨 Default placement for others
-    ctx.font = `700 80px Poppins`;
+     // Fixed style for text
+    ctx.font = `300 75px Poppins`;
+    ctx.fillStyle = '#000';
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
     ctx.fillText(name, canvas.width / 2.25, canvas.height - 1030);
+
+    const dataURL = canvas.toDataURL('image/png');
+    generatedImages.push({ dataURL, fileName: `${name}_${t.dataset.template}` });
+
+    const imgEl = document.createElement('img');
+    imgEl.src = dataURL;
+    output.appendChild(imgEl);
   }
-
-  const dataURL = canvas.toDataURL('image/png');
-  generatedImages.push({ dataURL, fileName: `${name}_${t.dataset.template}` });
-
-  const imgEl = document.createElement('img');
-  imgEl.src = dataURL;
-  output.appendChild(imgEl);
-}
-
 
   // Show download all button
   if (generatedImages.length > 0) {
