@@ -436,7 +436,7 @@
 <!-- Buttons -->
 <button id="generateBtn">Generate Certificates</button>
 <button id="downloadAllBtn" style="display:none;">Download All</button>
-<button id="clearBtn">Clear Output</button>
+<button id="clearBtn" style="display: none;">Clear Output</button>
 
 <!-- Output area -->
 <div class="output" id="output"></div>
@@ -458,9 +458,7 @@ let generatedImages = [];
 
 // CLEAR OUTPUT FUNCTIONALITY
 clearBtn.addEventListener('click', () => {
-  output.innerHTML = '';
-  generatedImages = [];
-  downloadAllBtn.style.display = 'none';
+  location.reload();
 });
 
 // TAB FUNCTIONALITY
