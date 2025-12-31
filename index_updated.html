@@ -7,7 +7,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
   body {
@@ -19,27 +19,6 @@
 
   h1 {
     margin-bottom: 10px;
-  }
-
-  /* Tabs */
-  .tabs {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-    gap: 10px;
-  }
-
-  .tab {
-    padding: 10px 20px;
-    border-radius: 6px;
-    background: #e0e0e0;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  .tab.active {
-    background: #007bff;
-    color: white;
   }
 
   .template-list {
@@ -62,17 +41,20 @@
   }
 
   .template img {
-    width: 200px;
+    width: 150px;
     height: auto;
     border-radius: 8px;
   }
 
+  /* Updated style for textarea */
   #nameInput {
     padding: 8px 12px;
-    width: 250px;
+    width: 400px; /* Increased width for better multi-name input */
+    height: 100px; /* Height to accommodate multiple lines */
     border-radius: 4px;
     border: 1px solid #ccc;
     margin-bottom: 10px;
+    resize: vertical; /* Allow vertical resizing */
   }
 
   button {
@@ -93,10 +75,6 @@
     display: none;
   }
 
-  .output {
-    margin-top: 30px;
-  }
-
   .output img {
     width: 300px;
     margin: 10px;
@@ -104,32 +82,46 @@
     border: 1px solid #ccc;
   }
 
-  .day {
-    display: none;
+  /* Floating counter */
+  #selectionCounter {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #007bff;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    font-weight: 600;
+    z-index: 999;
   }
 
-  .day.active {
-    display: flex;
+  #clearAllBtn {
+    background: #ff6272;
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  #clearAllBtn:hover {
+    background: #92212d;
   }
 </style>
 </head>
 <body>
 
 <h1>🎓 Certificate Generator</h1>
-<p>Select templates and enter your name below:</p>
+<p>Select templates and enter **names (one per line)** below:</p>
 
-<!-- Day Tabs 
-<div class="tabs">
-  <div class="tab active" data-day="day1">Day 1</div>
-  <div class="tab" data-day="day2">Day 2</div>
-  <div class="tab" data-day="day3">Day 3</div>
-</div>-->
+<div id="selectionCounter">
+  Selected: <span id="selectedCount">0</span>
+  <button id="clearAllBtn">🚮 Clear All</button>
+</div>
 
-<div id="day1" class="template-list day active">
-    <div class="template" data-template="attendance.png">
-        <img src="certs/attendance.png">
-        <p style="font-size: 9px !important">Attendance</p>
-    </div>
+<div id="day1" class="template-list">
+  <div class="template" data-template="1.png">
+      <img src="certs/1.png">
+      <p style="font-size: 9px !important">Attendance</p>
+  </div>
     <div class="template" data-template="cert1.png">
         <img src="certs/cert1.png">
         <p style="font-size: 9px !important">CO2 Contrast Adminstration WorkShop</p>
@@ -274,241 +266,125 @@
         <p style="font-size: 9px !important">Xray Physics Quality Control</p>
     </div>
 
-    <div class="template" data-template="cert29.png">
-        <img src="certs/cert29.png">
-        <p style="font-size: 9px !important">Artificial Intelligence in US General Imaging</p>
-    </div>
-
     <div class="template" data-template="cert30.png">
         <img src="certs/cert30.png">
-    <p style="font-size: 9px !important">Comprehensive Liver</p>
+        <p style="font-size: 9px !important">Artificial Intelligence in US General Imaging</p>
     </div>
 
     <div class="template" data-template="cert31.png">
         <img src="certs/cert31.png">
-        <p style="font-size: 9px !important">Contrast Enhanced Mammography reading workshop</p>
-    </div>
-
-    <div class="template" data-template="cert32.png">
-        <img src="certs/cert32.png">
-        <p style="font-size: 9px !important">Introduction to Biostatistics</p>
-    </div>
-
-    <div class="template" data-template="cert33.png">
-        <img src="certs/cert33.png">
-        <p style="font-size: 9px !important">Radiation Safety and Licensing Requirements</p>
-    </div>
-</div>
-
-<!-- <div id="day2" class="template-list day">
-    <div class="template" data-template="cert10.png">
-        <img src="certs/cert10.png">
-        <p style="font-size: 9px !important">Advanced-CT-Post-processing</p>
-    </div>
-    <div class="template" data-template="cert11.png">
-        <img src="certs/cert11.png">
-        <p style="font-size: 9px !important">AI VS Radiologists</p>
-    </div>
-
-    <div class="template" data-template="cert12.png">
-        <img src="certs/cert12.png">
-        <p style="font-size: 9px !important">Angio/Fluoro Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert13.png">
-        <img src="certs/cert13.png">
-        <p style="font-size: 9px !important">Beyond the Basics:</p>
-    </div>
-
-    <div class="template" data-template="cert14.png">
-        <img src="certs/cert14.png">
-        <p style="font-size: 9px !important">CT Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert15.png">
-        <img src="certs/cert15.png">
-        <p style="font-size: 9px !important">Ethics in AI Panel discussion</p>
-    </div>
-
-    <div class="template" data-template="cert16.png">
-        <img src="certs/cert16.png">
-        <p style="font-size: 9px !important">From Shear Waves</p>
-    </div>
-
-    <div class="template" data-template="cert17.png">
-        <img src="certs/cert17.png">
-        <p style="font-size: 9px !important">Hands-on Advanced MRI Brain Imaging</p>
-    </div>
-
-    <div class="template" data-template="cert18.png">
-        <img src="certs/cert18.png">
-        <p style="font-size: 9px !important">Hands-on Cardiac MRI</p>
-    </div>
-
-    <div class="template" data-template="cert19.png">
-        <img src="certs/cert19.png">
-        <p style="font-size: 9px !important">Hands-on Difficult IV</p>
-    </div>
-
-    <div class="template" data-template="cert20.png">
-        <img src="certs/cert20.png">
-        <p style="font-size: 9px !important">How to Validate AI model</p>
-    </div>
-
-    <div class="template" data-template="cert21.png">
-        <img src="certs/cert21.png">
-        <p style="font-size: 9px !important">Mammo Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert22.png">
-        <img src="certs/cert22.png">
-        <p style="font-size: 9px !important">Mammography Essentials</p>
-    </div>
-
-    <div class="template" data-template="cert23.png">
-        <img src="certs/cert23.png">
-        <p style="font-size: 9px !important">Master’s Students Scientific Session</p>
-    </div>
-
-    <div class="template" data-template="cert24.png">
-        <img src="certs/cert24.png">
-        <p style="font-size: 9px !important">MRI Guided Breast Biopsy</p>
-    </div>
-
-    <div class="template" data-template="cert25.png">
-        <img src="certs/cert25.png">
-        <p style="font-size: 9px !important">MRI Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert26.png">
-        <img src="certs/cert26.png">
-        <p style="font-size: 9px !important">Nuclear Medicine Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert27.png">
-        <img src="certs/cert27.png">
-        <p style="font-size: 9px !important">Ultrasound Guided Lumber Puncture</p>
-    </div>
-
-    <div class="template" data-template="cert28.png">
-        <img src="certs/cert28.png">
-        <p style="font-size: 9px !important">US Physics Quality Control</p>
-    </div>
-
-    <div class="template" data-template="cert29.png">
-        <img src="certs/cert29.png">
-        <p style="font-size: 9px !important">Xray Physics Quality Control</p>
-    </div>
-
-</div> -->
-
-<!-- <div id="day3" class="template-list day">
-    <div class="template" data-template="cert29.png">
-        <img src="certs/cert29.png">
-        <p style="font-size: 9px !important">Artificial Intelligence in US General Imaging</p>
-    </div>
-
-    <div class="template" data-template="cert30.png">
-        <img src="certs/cert30.png">
     <p style="font-size: 9px !important">Comprehensive Liver</p>
     </div>
 
-    <div class="template" data-template="cert31.png">
-        <img src="certs/cert31.png">
-        <p style="font-size: 9px !important">Contrast Enhanced Mammography reading workshop</p>
-    </div>
-
     <div class="template" data-template="cert32.png">
         <img src="certs/cert32.png">
-        <p style="font-size: 9px !important">Introduction to Biostatistics</p>
+        <p style="font-size: 9px !important">Contrast Enhanced Mammography reading workshop</p>
     </div>
 
     <div class="template" data-template="cert33.png">
         <img src="certs/cert33.png">
-        <p style="font-size: 9px !important">Radiation Safety and Licensing Requirements</p>
+        <p style="font-size: 9px !important">Introduction to Biostatistics</p>
     </div>
 
-</div> -->
+    <div class="template" data-template="cert34.png">
+        <img src="certs/cert34.png">
+        <p style="font-size: 9px !important">Radiation Safety and Licensing Requirements</p>
+    </div>
+    <div class="template" data-template="speaker.png">
+        <img src="certs/speaker.png">
+        <p style="font-size: 9px !important">Speaker</p>
+    </div>
+  </div>
 
-<!-- Name input -->
-<input type="text" id="nameInput" placeholder="Enter your name"><br>
+<textarea id="nameInput" placeholder="Enter names, one per line (e.g.,&#10;John Smith&#10;Jane Doe&#10;... )"></textarea><br>
 
-<!-- Buttons -->
 <button id="generateBtn">Generate Certificates</button>
 <button id="downloadAllBtn" style="display:none;">Download All</button>
 
-<!-- Output area -->
 <div class="output" id="output"></div>
-
-<!-- Hidden canvas for drawing -->
 <canvas id="canvas"></canvas>
 
 <script>
-const tabs = document.querySelectorAll('.tab');
-const days = document.querySelectorAll('.day');
 const generateBtn = document.getElementById('generateBtn');
 const downloadAllBtn = document.getElementById('downloadAllBtn');
-const nameInput = document.getElementById('nameInput');
+const nameInput = document.getElementById('nameInput'); // This is now a textarea
 const output = document.getElementById('output');
 const canvas = document.getElementById('canvas');
 const ctx = canvas.getContext('2d');
+const selectedCountEl = document.getElementById('selectedCount');
+const clearAllBtn = document.getElementById('clearAllBtn');
 let generatedImages = [];
 
-// TAB FUNCTIONALITY
-tabs.forEach(tab => {
-  tab.addEventListener('click', () => {
-    tabs.forEach(t => t.classList.remove('active'));
-    tab.classList.add('active');
-    const dayId = tab.dataset.day;
-    days.forEach(day => {
-      day.classList.remove('active');
-      if (day.id === dayId) day.classList.add('active');
-    });
-  });
-});
-
-// Template selection toggle
+// Template selection toggle and counter update
 document.addEventListener('click', e => {
   if (e.target.closest('.template')) {
-    e.target.closest('.template').classList.toggle('selected');
+    const template = e.target.closest('.template');
+    template.classList.toggle('selected');
+    updateCounter();
   }
 });
 
+function updateCounter() {
+  const selectedCount = document.querySelectorAll('.template.selected').length;
+  selectedCountEl.textContent = selectedCount;
+}
+
+// Helper: Load image
+function loadImage(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous";
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = src;
+  });
+}
+
 // Generate certificates
 generateBtn.addEventListener('click', async () => {
-  const name = nameInput.value.trim();
-  if (!name) return alert('Please enter your name');
+  // Get and process all names, filtering out empty lines
+  const names = nameInput.value.split('\n').map(name => name.trim()).filter(name => name.length > 0);
   
+  if (names.length === 0) return alert('Please enter at least one name');
+
   const selectedTemplates = [...document.querySelectorAll('.template.selected')];
   if (selectedTemplates.length === 0) return alert('Select at least one certificate');
 
   output.innerHTML = ''; 
   generatedImages = [];
 
-  for (const t of selectedTemplates) {
-    const imgPath = 'certs/' + t.dataset.template;
-    const img = await loadImage(imgPath);
+  // Loop through each name first
+  for (const name of names) {
+    // Then loop through each selected template for that name
+    for (const t of selectedTemplates) {
+      const imgPath = 'certs/' + t.dataset.template;
+      const img = await loadImage(imgPath);
 
-    canvas.width = img.width;
-    canvas.height = img.height;
-    ctx.drawImage(img, 0, 0);
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0);
 
-     // Fixed style for text
-    ctx.font = `300 75px Poppins`;
-    ctx.fillStyle = '#000';
-    ctx.textBaseline = 'middle';
-    ctx.textAlign = 'center';
-    ctx.fillText(name, canvas.width / 2.25, canvas.height - 1030);
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#000';
+      ctx.font = `700 100px Poppins`;
 
-    const dataURL = canvas.toDataURL('image/png');
-    generatedImages.push({ dataURL, fileName: `${name}_${t.dataset.template}` });
+      // Draw the name on the certificate
+      if (t.dataset.template === '1.png') {
+        ctx.fillText(name, canvas.width / 2.25, canvas.height - 1000);
+      } else {
+        ctx.fillText(name, canvas.width / 2.25, canvas.height - 1030);
+      }
 
-    const imgEl = document.createElement('img');
-    imgEl.src = dataURL;
-    output.appendChild(imgEl);
+      const dataURL = canvas.toDataURL('image/png');
+      generatedImages.push({ dataURL, fileName: `${name.replace(/[^a-zA-Z0-9]/g, '_')}_${t.dataset.template}` }); // Updated file name to be safer
+
+      const imgEl = document.createElement('img');
+      imgEl.src = dataURL;
+      output.appendChild(imgEl);
+    }
   }
 
-  // Show download all button
   if (generatedImages.length > 0) {
     downloadAllBtn.style.display = 'inline-block';
   }
@@ -526,16 +402,15 @@ downloadAllBtn.addEventListener('click', () => {
   });
 });
 
-// Helper: Load image
-function loadImage(src) {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = "anonymous";
-    img.onload = () => resolve(img);
-    img.onerror = reject;
-    img.src = src;
-  });
-}
+// Clear all (reset selections, input, output)
+clearAllBtn.addEventListener('click', () => {
+  document.querySelectorAll('.template.selected').forEach(el => el.classList.remove('selected'));
+  nameInput.value = '';
+  output.innerHTML = '';
+  generatedImages = [];
+  downloadAllBtn.style.display = 'none';
+  updateCounter();
+});
 </script>
 
 </body>
